@@ -1,14 +1,14 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fugaz_One, Open_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const opensans = Open_Sans({
+  variable: "--open-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const fugaz = Fugaz_One({
   subsets: ["latin"],
+  weight: ['400']
 });
 
 export const metadata = {
@@ -18,21 +18,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   const header =(
-    <header>
-      head
+    <header className="p-4 sm:p-8 flex items-center justify-between gap-4">
+      <h1 className={'text-base sm:text-lg textGradient ' + fugaz.className}>Daily Smiley</h1>
     </header>
   )
 
   const footer = (
-    <footer>
-      foot
+    <footer className="p-4 sm:p-8 grid place-items-center">
+      <p className={'text-indigo-500 ' + fugaz.className}>Created with 💙</p>
     </footer>
   )
 
   return (
     <html lang="en">
       <body
-        className={ 'w-full max-width-[1000px] mx-auto text-sm sm:text-base min-h-screen flex flex-col ' + `${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={ 'w-full max-width-[1000px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800 ' + opensans.className}
       >
         {header}
         {children}
