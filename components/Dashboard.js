@@ -1,6 +1,12 @@
+'use client'
 import { Fugaz_One } from 'next/font/google';
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import Calendar from './Calendar';
+import { useAuth } from '@/context/AuthContext';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '@/firebase';
+import Login from './Login';
+import Loading from './Loading';
 
 const fugaz = Fugaz_One({
   subsets: ["latin"],
@@ -8,6 +14,45 @@ const fugaz = Fugaz_One({
 });
 
 export default function Dashboard() {
+  const { currentUser, userDataObj, setUserDataObj, loading } = useAuth();
+  const [data, setData] = useState({});
+
+  function countValues(){
+  }
+  
+  async function handleSetMood(mood){
+    const now = new Date();
+    const day = now.getDate();
+    const month = now.getMonth();
+    const year = now.getFullYear();
+
+    try{
+      const newData = {...UserDataObj};
+      if(!newData?.[year]){
+        newData[year] ={}
+      }
+      if(!newData?.[year]?.[month]){
+        newData[year][month] ={}
+      }
+  
+      newData[year][month][day] = mood;
+  
+      setData(newData);
+      setUserDataObj(newData);
+      
+      const docRef = doc(db, 'users', currentUser.uid);
+      const res = await setDoc(docRef, {
+        [year]: {
+          [month]: {
+            [day]: mood
+          }
+        }
+      }, { merge: true });
+    }catch(err){
+      console.log("Failed to set data: ", err.message);
+    }
+  }
+
   const statuses = {
     num_days: 14,
     time_remaining: '13:14:26',
@@ -21,6 +66,23 @@ export default function Dashboard() {
     'Good': '☺️',
     'Elated': '😍',
   }
+
+  useEffect(() =>{
+    if(!currentUser || !userDataObj) {
+      return;
+    }
+    setData(userDataObj);
+  }, [currentUser, userDataObj])
+
+  
+  if(loading){
+    return <Loading />
+  }
+
+  if(!currentUser) {
+    return <Login />
+  }
+  
 
   return (
     <div className='flex flex-col flex-1 gap-8 sm:gap-12 md:gap-16'>
@@ -38,14 +100,17 @@ export default function Dashboard() {
       <div className='flex items-stretch flex-wrap gap-4'>
         {Object.keys(moods).map((mood, moodIndex) => {
           return(
-            <button className={'py-4 px-5 rounded-2xl purpleShadow duration-200 bg-indigo-50 hover:bg-indigo-100 text-center flex flex-col gap-2 flex-1'} key={moodIndex}>
+            <button onClick={()=>{
+              const currentMoodValue = moodIndex + 1;
+              handleSetMood(currentMoodValue);
+            }} className={'py-4 px-5 rounded-2xl purpleShadow duration-200 bg-indigo-50 hover:bg-indigo-100 text-center flex flex-col gap-2 flex-1'} key={moodIndex}>
               <p className='text-4xl sm:text-5xl md:text-6xl'>{moods[mood]}</p>
               <p className={'text-indigo-500 text-xs sm:text-sm md:text-base ' + fugaz.className}>{mood}</p>
             </button>
           )
         })}
       </div>
-      <Calendar />
+      <Calendar data={data} handleSetMood={handleSetMood}/>
     </div>
   )
 }
