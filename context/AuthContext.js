@@ -2,7 +2,7 @@
 import { auth, db } from "@/firebase";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import React, {useContext, useState, useEffect, use} from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 
 const AuthContext = React.createContext();
@@ -53,6 +53,7 @@ export function AuthProvider({ children }){
                     firebaseData = docSnap.data();
                     console.log(firebaseData);
                 }
+                console('setting user data', firebaseData);
                 setUserDataObj(firebaseData);
 
             } catch(err){

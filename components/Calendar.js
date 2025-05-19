@@ -8,18 +8,20 @@ import { gradients, baseRating } from '@/utils';
   const now = new Date()
   const dayList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-  export const demoData = {
-    "15": 2, "16": 4, "17": 1, "18": 3, "19": 5,
-    "20": 2, "21": 4, "22": 1, "23": 3, "24": 5,
-}
 
 export default function Calendar(props) {
-  const { demo, data, handleSetMood } = props;
-
+  const { demo, completeData, handleSetMood } = props;
+  
   const now = new Date();
   const currentMonth = now.getMonth();
   const [selectedMonth, setSelectedMonth] = useState(Object.keys(months)[currentMonth]);
   const [selectedYear, setSelectedYear] = useState(now.getFullYear());
+  
+  const numericMonth = Object.keys(months).indexOf(selectedMonth);
+  const data = completeData?.[selectedYear]?.[numericMonth] || {};
+  function handleIncrementMonth(val) {
+    
+  }
 
   
   const monthNow = new Date(selectedYear, Object.keys(months).indexOf(selectedMonth), 1);

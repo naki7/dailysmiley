@@ -27,7 +27,7 @@ export default function Dashboard() {
     const year = now.getFullYear();
 
     try{
-      const newData = {...UserDataObj};
+      const newData = {...userDataObj};
       if(!newData?.[year]){
         newData[year] ={}
       }
@@ -110,7 +110,7 @@ export default function Dashboard() {
           )
         })}
       </div>
-      <Calendar data={data} handleSetMood={handleSetMood}/>
+      <Calendar completeData={data} handleSetMood={handleSetMood}/>
     </div>
   )
 }
