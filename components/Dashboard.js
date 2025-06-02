@@ -18,6 +18,7 @@ export default function Dashboard() {
   const [data, setData] = useState({});
 
   function countValues(){
+    
   }
   
   async function handleSetMood(mood){

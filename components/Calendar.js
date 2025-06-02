@@ -19,6 +19,7 @@ export default function Calendar(props) {
   
   const numericMonth = Object.keys(months).indexOf(selectedMonth);
   const data = completeData?.[selectedYear]?.[numericMonth] || {};
+  console.log('THIS MONTHS DATA: ', completeData?.[selectedYear]?.[numericMonth])
   function handleIncrementMonth(val) {
     
   }
