@@ -51,11 +51,11 @@ export default function Calendar(props) {
       <div className='grid grid-cols-5 gap-4'>
         <button onClick={() =>{
           handleIncrementMonth(-1);
-        }} className='mr-auto text-indigo-400 text-lg sm:text-xl duration-200 hover:opacity-60'><i className="fa-solid fa-circle-chevron-left"></i></button>
+        }} className='mr-auto text-yellow-400 text-lg sm:text-xl duration-200 hover:opacity-60'><i className="fa-solid fa-circle-chevron-left"></i></button>
         <p className={'text-center col-span-3 capitalized whitespace-nowrap textGradient ' + fugaz.className}>{selectedMonth}, {selectedYear}</p>
         <button onClick={() =>{
           handleIncrementMonth(+1);
-        }} className='ml-auto text-indigo-400 text-lg sm:text-xl duration-200 hover:opacity-60'><i className="fa-solid fa-circle-chevron-right"></i></button>
+        }} className='ml-auto text-yellow-400 text-lg sm:text-xl duration-200 hover:opacity-60'><i className="fa-solid fa-circle-chevron-right"></i></button>
       </div>
       <div className='flex flex-col overflow-hidden gap-1 py-4 sm:py-6 md:py-10'>
           {[...Array(numRows).keys()].map((row, rowIndex) =>{
@@ -70,16 +70,16 @@ export default function Calendar(props) {
                   
                   if(!dayDisplay){
                     return(
-                      <div className='bg-white' key={dayOfWeekIndex} />
+                      <div className='bg-red-500' key={dayOfWeekIndex} />
                     )
                   }
                   
-                  let color = demo ? gradients.indigo[baseRating[dayIndex]] :
-                  dayIndex in data ? gradients.indigo[data[dayIndex]] :
-                  'white';
+                  let color = demo ? gradients.yellow[baseRating[dayIndex]] :
+                  dayIndex in data ? gradients.yellow[data[dayIndex]] :
+                  'red-400';
                   
                   return(
-                    <div style={{background: color}} className={'text-xs sm:text-sm border border-solid p-2 flex items-center gap-2 justify-between rounded-lg ' + (isToday? ' border-indigo-400 ' : ' border-indigo-100 ') + (color === 'white' ? ' text-indigo-400 ' : ' text-white ')} key={dayOfWeekIndex}>
+                    <div style={{background: color}} className={'text-xs sm:text-sm border border-solid p-2 pb-10 flex items-center gap-2 justify-between rounded-lg ' + (isToday? ' border-red-300 ' : ' border-yellow-600 ') + (color === 'red-400' ? ' text-yellow-950 ' : ' text-red-500 ')} key={dayOfWeekIndex}>
                       <p>{dayIndex}</p>
                     </div>
                   )

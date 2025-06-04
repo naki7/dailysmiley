@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
 
   const footer = (
     <footer className="p-4 sm:p-8 grid place-items-center">
-      <p className={'text-indigo-500 ' + fugaz.className}>Created with 💙</p>
+      <p className={'text-yellow-600 ' + fugaz.className}>Created by <a className="text-yellow-500 hover:text-yellow-400" href="https://www.nakineves.com" tabIndex="1" target="_blank" rel="noreferrer">Naki Neves</a> 💛</p>
     </footer>
   )
 
@@ -41,7 +41,7 @@ export default function RootLayout({ children }) {
       <Head/>
       <AuthProvider>
         <body
-          className={ 'w-full max-width-[1000px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800 ' + opensans.className}
+          className={ 'w-full bg-red-500 max-width-[1000px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-yellow-950 ' + opensans.className}
           >
           {header}
           {children}

@@ -72,11 +72,11 @@ export default function Dashboard() {
 
 
   const moods = {
-    '&*@#$': '😭',
-    'Sad': '🥲',
-    'Existing': '😐',
-    'Good': '☺️',
-    'Elated': '😍',
+    'Broken': '😵',
+    'Down': '😞',
+    'Alright': '😐',
+    'Joyful': '😋',
+    'Fantastic!': '🤩',
   }
 
   useEffect(() =>{
@@ -98,7 +98,7 @@ export default function Dashboard() {
 
   return (
     <div className='flex flex-col flex-1 gap-8 sm:gap-12 md:gap-16'>
-      <div className='grid grid-cols-3 bg-indigo-50 text-indigo-500 p-4 gap-4 rounded-lg'>
+      <div className='grid grid-cols-3 bg-yellow-50 text-yellow-600 p-4 gap-4 rounded-lg'>
         {Object.keys(statuses).map((status, statusIndex) => {
           return(
             <div className='flex flex-col gap-1 sm:gap-2' key={statusIndex}>
@@ -115,9 +115,9 @@ export default function Dashboard() {
             <button onClick={()=>{
               const currentMoodValue = moodIndex + 1;
               handleSetMood(currentMoodValue);
-            }} className={'py-4 px-5 rounded-2xl purpleShadow duration-200 bg-indigo-50 hover:bg-indigo-100 text-center flex flex-col gap-2 flex-1'} key={moodIndex}>
+            }} className={'py-4 px-5 rounded-2xl purpleShadow duration-200 bg-yellow-50 hover:bg-yellow-100 text-center flex flex-col gap-2 flex-1'} key={moodIndex}>
               <p className='text-4xl sm:text-5xl md:text-6xl'>{moods[mood]}</p>
-              <p className={'text-indigo-500 text-xs sm:text-sm md:text-base ' + fugaz.className}>{mood}</p>
+              <p className={'text-yellow-600 text-xs sm:text-sm md:text-base ' + fugaz.className}>{mood}</p>
             </button>
           )
         })}
